@@ -1,0 +1,33 @@
+[33mcommit 3d7990eeb1e8b4b8b5a7aedf407b9e13bd46aeef[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m
+Author: Fahad Ahmad <24mdbcs552@uetmardan.edu.pk>
+Date:   Mon Jul 13 20:30:32 2026 +0500
+
+    Fix note extraction bug in prepare_data.py and verify full pipeline works
+
+ PLACE_MIDI_FILES_HERE.txt      |   9 [31m---------[m
+ data/notes.pkl                 | Bin [31m0[m -> [32m2899212[m bytes
+ generated_output.mid           | Bin [31m0[m -> [32m1863[m bytes
+ midi_songs/mz_311_1.mid        | Bin [31m0[m -> [32m28963[m bytes
+ midi_songs/mz_330_2.mid        | Bin [31m0[m -> [32m18285[m bytes
+ models/final_model.keras       | Bin [31m0[m -> [32m43396124[m bytes
+ models/weights-01-4.5242.keras | Bin [31m0[m -> [32m43396124[m bytes
+ models/weights-02-4.0431.keras | Bin [31m0[m -> [32m43396124[m bytes
+ prepare_data.py                |  18 [32m++++++++++[m[31m--------[m
+ requirements.txt               |   6 [32m+++[m[31m---[m
+ train.py                       |   2 [32m+[m[31m-[m
+ 11 files changed, 14 insertions(+), 21 deletions(-)
+
+[33mcommit b2c052689ec81b4c426bc3e865ca3bee993d3c8e[m
+Author: Fahad Ahmad <24mdbcs552@uetmardan.edu.pk>
+Date:   Sun Jul 12 22:15:42 2026 +0500
+
+    Task 3: Music Generation with AI - CodeAlpha AI Internship
+
+ .gitignore                |  18 [32m+++++++[m
+ PLACE_MIDI_FILES_HERE.txt |   9 [32m++++[m
+ README.md                 |  81 [32m+++++++++++++++++++++++++++++[m
+ generate.py               | 118 [32m++++++++++++++++++++++++++++++++++++++++++[m
+ prepare_data.py           | 129 [32m++++++++++++++++++++++++++++++++++++++++++++++[m
+ requirements.txt          |   3 [32m++[m
+ train.py                  | 101 [32m++++++++++++++++++++++++++++++++++++[m
+ 7 files changed, 459 insertions(+)
