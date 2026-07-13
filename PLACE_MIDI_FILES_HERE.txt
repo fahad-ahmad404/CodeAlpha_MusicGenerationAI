@@ -1,9 +1,0 @@
-Put your training .mid files in this folder before running prepare_data.py.
-
-You can get free MIDI datasets from sources such as:
-- https://www.kaggle.com/datasets (search "classical piano midi")
-- http://www.piano-midi.de/
-- https://magenta.tensorflow.org/datasets/maestro
-
-Aim for at least 20-50 MIDI files of a similar style (e.g. all classical
-piano) for the model to learn a consistent musical pattern.

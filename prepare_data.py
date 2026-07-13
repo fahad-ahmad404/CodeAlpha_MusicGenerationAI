@@ -13,10 +13,11 @@
 from __future__ import annotations
 
 import glob                                    # Finds all MIDI file paths inside the dataset folder
+import os                                      # Used to create the data/ output folder
 import pickle                                  # Saves prepared Python objects to disk for later use
 
 import numpy as np                             # Handles the numeric arrays used for model training
-from music21 import converter, instrument, note, chord   # Parses MIDI files and reads notes/chords
+from music21 import converter, note, chord      # Parses MIDI files and reads notes/chords
 
 MIDI_FOLDER = "midi_songs"                     # Folder containing the training .mid files
 NOTES_FILE = "data/notes.pkl"                  # Where the extracted raw notes/chords get saved
@@ -45,11 +46,7 @@ def extract_notes_from_midi(midi_folder: str) -> list[str]:
         print(f"Parsing: {file_path}")                       # Show progress while processing many files
         midi_stream = converter.parse(file_path)             # Load the MIDI file into a music21 stream
 
-        try:
-            parts = instrument.partitionByInstrument(midi_stream)  # Split multi-instrument tracks apart
-            elements = parts.parts[0].recurse() if parts else midi_stream.flat.notes
-        except Exception:
-            elements = midi_stream.flat.notes                # Fall back to a flat note list if parsing fails
+        elements = midi_stream.flatten().notes                # Get every note/chord across ALL tracks/parts
 
         for element in elements:
             if isinstance(element, note.Note):
@@ -101,11 +98,16 @@ def main() -> None:
     notes = extract_notes_from_midi(MIDI_FOLDER)               # Extract every note/chord from all MIDI files
     print(f"\nExtracted {len(notes)} notes/chords from the dataset.")
 
+    if len(notes) <= SEQUENCE_LENGTH:                          # Guard against too little data to build sequences
+        raise ValueError(
+            f"Only {len(notes)} notes were found, which isn't enough to build sequences of length "
+            f"{SEQUENCE_LENGTH}. Add more/longer MIDI files to midi_songs/, or lower SEQUENCE_LENGTH."
+        )
+
     network_input, network_output, note_to_int, vocab_size = build_sequences(notes)
     print(f"Built {len(network_input)} training sequences.")
     print(f"Vocabulary size: {vocab_size} unique notes/chords.")
 
-    import os
     os.makedirs("data", exist_ok=True)                          # Create the data/ folder if it doesn't exist yet
 
     with open(NOTES_FILE, "wb") as notes_file:

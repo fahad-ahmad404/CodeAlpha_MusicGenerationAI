@@ -23,7 +23,7 @@ from tensorflow.keras.utils import to_categorical            # Converts integer 
 
 NOTES_FILE = "data/notes.pkl"                              # Where the prepared training data was saved
 MODEL_DIR = "models"                                        # Folder where trained model checkpoints get saved
-EPOCHS = 100                                                 # Number of full passes over the training data
+EPOCHS = 2                                                # Number of full passes over the training data
 BATCH_SIZE = 64                                              # Number of sequences processed before each weight update
 
 
